@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Assignment#3</title>
+
+  <script src="jquery-1.7.2.js"></script>
+  <script src="jquery-1.7.2.min.js"></script>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <style type="text/css">
+    #resizable { width: 100px; height: 100px; background: green;}
+  </style>
+ 
+ 
+
+  <script type="text/javascript">
+   function buttonFunction()
+   {
+   	alert("Button was clicked!");
+   }
+
+   </script>
+
+
+  <style type="text/css">
+   div.hideshow
+   {
+   	background-color:red;
+   	padding: 7px;
+   	width: 250px;
+   	height: 250px;
+   }
+
+   div.slide
+   {
+   	background-color: blue;
+   	padding: 7px;
+   	width: 250px;
+   	height: 250px;
+   }
+
+   div.fade
+   {
+   	background-color: #993300;
+   	padding: 7px;
+   	width: 250px;
+   	height: 250px;
+   }
+
+   div.image
+   {
+   	background-color: black;
+   	padding: 7px;
+   	width: 1000px;
+   	height: 250px;
+   }
+
+   div.Box
+ {
+  background-color:green;
+  padding: 7px;
+  width: 1000px;
+  height: 250px;       
+ }
+
+  img
+  {
+  position:relative;
+  }
+
+  </style>
+ 
+
+</head>
+
+<body>
+
+<h1 style="font-size:100%;">1.Click</h1>
+
+<input type="button" onclick="buttonFunction()" value = "Click Me" />
+<p></P>
+<h2 style="font-size:100%;">2.Hide and Show</h2>
+<p class="hide">Hide</p>
+<p class="show">Show</p>
+<div class="hideshow"></div>
+
+<script>
+$(".hide").click(function(){
+	$(".hideshow").hide("slow");
+});
+</script>
+
+<script>
+$(".show").click(function(){
+	$(".hideshow").show("slow");
+});
+</script>
+
+<h3 style="font-size:100%;">3.Sliding</h3>
+<p class="slidebox">slide box </p>
+<div class="slide"></div>
+
+<script>
+$(".slidebox").click(function(){
+	$(".slide").slideUp();
+});
+</script>
+
+<h4 style="font-size:100%;">4. Fade In/Out </h4>
+<div class="fade"></div>
+<script>
+$(".fade").click(function(){
+	$(".fade").fadeOut("slow");
+});
+</script>
+
+<p></p>
+<h5 style="font-size:100%;">5. Resize</h5>
+
+<button class="resize">Resize green box</button>
+  
+<div id="resizable"></div>
+
+ <script>
+  $(document).ready(function() {
+   $(".resize").click(function(){
+    $("#resizable").resizable();
+  });
+});
+  </script>
+
+
+<p></p>
+<h6 style="font-size:100%;">6. Dragging</h6>
+
+<script type="text/javascript">
+document.onmousedown=coordinates;
+document.onmouseup=mouseup;
+
+function coordinates(e)
+{
+if (e == null) { e = window.event;}
+var sender = (typeof( window.event ) != "undefined" ) ? e.srcElement : e.target;
+
+if (sender.id=="moveMe")
+  {
+  mouseover=true;
+  pleft=parseInt(movMeId.style.left);
+  ptop=parseInt(movMeId.style.top);
+  xcoor=e.clientX;
+  ycoor=e.clientY;
+  document.onmousemove=moveImage;
+  return false;
+  }
+else { return false; }
+}
+
+function moveImage(e)
+{
+if (e == null) { e = window.event;}
+movMeId.style.left=pleft+e.clientX-xcoor+"px";
+movMeId.style.top=ptop+e.clientY-ycoor+"px";
+return false;
+}
+
+function mouseup(e)
+{
+document.onmousemove=null;
+}
+</script>
+
+
+<div class="image">
+<img id="moveMe" src="logo_home.jpg" alt="Smiley face" width="407" height="79" />
+</div>
+
+<script type="text/javascript">
+//The movable image
+movMeId=document.getElementById("moveMe");
+//image starting location
+movMeId.style.top="75px";
+movMeId.style.left="75px";
+</script>
+
+
+
+</body>
+
+</html>

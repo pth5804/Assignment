@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+<script>
+$(document).ready(function() {
+    $('#fetch_followers').click(function() {
+        var $access_token = '{access-token}';
+        pollInstagram('https://api.instagram.com/v1/users/338e6102a4bc4db4b3321b4bbff1610b/followed-by?access_token=201238739.338e610.2805e73e7ea44b7cb6ab87675c72eedf&count=100');
+    });
+});
+
+function pollInstagram(next_url, count) {
+    $.ajax({
+        method: "GET",
+        url: next_url,
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "jsonpcallback",
+        success: function(data) {
+            $.each(data.data, function(i, item) {
+                $("#log").val($("#log").val() + item.id + '\n');
+            });
+            $("#log").val($("#log").val() + data.pagination.next_url + '\n');
+
+            // If the next url is not null or blank:
+            if( data.pagination.next_url && count <=50 ) {
+                pollInstagram(data.pagination.next_url, ++count);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            //alert("Check you internet Connection");
+            $("#log").val($("#log").val() + 'Error\n');
+        }
+    });
+}​ 
+</script>
+  <style>img{ height: 150px; float: left; }</style>
+</head>
+<body>
+  <button class="fetch_followers">click me</button>
+  <div id="log" class ="log">
+  </div>
+</body>
+</html>

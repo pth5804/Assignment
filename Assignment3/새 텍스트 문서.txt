@@ -1,0 +1,15 @@
+ $(document).ready(function){
+ 	$("#clickslide").click(function){
+ 	$("#slider").slideToggle("slow");
+ });
+});
+
+<script>  
+$(document.body).click(function () {
+    if ($("div:first").is(":hidden")) 
+	{
+          $("div").show("slow");    
+	} else {    
+	  $("div").slideUp();    } 
+	});  
+</script>

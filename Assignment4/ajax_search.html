@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$("#tweet-btn").bind("click", function()  {
+
+    $.ajax({
+        type: "GET",
+        dataType: "jsonp",
+        cache: false,
+        url: "https://api.instagram.com/v1/users/338e6102a4bc4db4b3321b4bbff1610b/media/recent/?access_token=201238739.338e610.2805e73e7ea44b7cb6ab87675c72eedf",
+        success: function(data) {
+
+            for (var i = 0; i < 6; i++) {
+        $(".instagram").append("<div class='instagram-placeholder'>
+        <a target='_blank' href='" + data.data[i].link +"'><img class='instagram-image' src='" + data.data[i].images.thumbnail.url +"'/></a></div>");   
+                }     
+                            
+        }
+    });
+});
+	</script>
+</head>
+	<body>
+		<h1>Twitter Search Client</h1>
+		<div id="instagram"></div>
+		<button id="tweet-btn">Retrieve Tweets</button>
+		
+	</body>
+</html>

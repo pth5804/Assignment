@@ -1,0 +1,63 @@
+https://api.instagram.com/oauth/authorize/?client_id=338e6102a4bc4db4b3321b4bbff1610b&redirect_uri=
+
+http://people.ischool.berkeley.edu/~i153-028/a1/assignment4.html&response_type=code
+
+
+https://api.instagram.com/oauth/authorize/?client_id=338e6102a4bc4db4b3321b4bbff1610b&redirect_uri=
+
+http://people.ischool.berkeley.edu/~i153-028/a1/assignment4.html&response_type=token
+
+
+
+https://api.instagram.com/v1/users/338e6102a4bc4db4b3321b4bbff1610b/media/recent/?access_token=201238739.338e610.2805e73e7ea44b7cb6ab87675c72eedf
+
+
+http://people.ischool.berkeley.edu/~i153-028/a1/assignment4.html?code=26b6c63457944c9888a6d60eb93e7fc4
+
+http://people.ischool.berkeley.edu/~i153-028/a1/assignment4.html?code=3f1016f93b6b46bea62a2c91f8d662a6
+
+http://people.ischool.berkeley.edu/~i153-028/a1/assignment4.html#access_token=201238739.338e610.2805e73e7ea44b7cb6ab87675c72eedf
+
+
+$(document).ready(function() {
+    $('#fetch_followers').click(function() {
+        var $access_token = '{access-token}';
+        pollInstagram('https://api.instagram.com/v1/users/338e6102a4bc4db4b3321b4bbff1610b/followed-by?access_token=201238739.338e610.2805e73e7ea44b7cb6ab87675c72eedf&count=100');
+    });
+});
+
+function pollInstagram(next_url, count) {
+    $.ajax({
+        method: "GET",
+        url: next_url,
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "jsonpcallback",
+        success: function(data) {
+            $.each(data.data, function(i, item) {
+                $("#log").val($("#log").val() + item.id + '\n');
+            });
+            $("#log").val($("#log").val() + data.pagination.next_url + '\n');
+
+            // If the next url is not null or blank:
+            if( data.pagination.next_url && count <=50 ) {
+                pollInstagram(data.pagination.next_url, ++count);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            //alert("Check you internet Connection");
+            $("#log").val($("#log").val() + 'Error\n');
+        }
+    });
+}? 
+
+
+
+An body start tag seen but an element of the same type was already open.
+
+$("a").on("click", function(e) { 
+    e.preventDefault(); 
+    var sectionID = '#'+ $(this).data("section"); 
+    $("#content section:visible").fadeOut(); 
+    $(sectionID).fadeIn(); 
+}); 

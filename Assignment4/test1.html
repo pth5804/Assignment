@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' type='text/javascript' charset='utf-8'></script>
+  <script src='javascripts/application.js' type='text/javascript' charset='utf-8'></script>
+  <link rel='stylesheet' href='stylesheets/application.css' type='text/css' media='screen'>
+  <script>
+
+  </script>
+
+</head>
+<body>
+	<?php
+			$json = file_get_contents("http://twitter.com/status/user_timeline/lorenzoraffio.json?count=10", true);
+			$decode = json_decode($json, true);
+		echo "
+			<ul style='color:#6E6E6E'>";
+			$count = count($decode); //counting the number of status
+			$date = $tweets['created_at']; // created date
+			for($i=0;$i<$count;$i++){ echo '
+			<li>'.$decode[$i]['text'].'<br><a href='; echo '"http://twitter.com/#!/'.$decode[0][user][name].'/status/'.$decode[$i][id].'"><small>'. date('j F',strtotime($decode[$i]['created_at'])) ."</small></a> - <a href='http://twitter.com/intent/tweet?in_reply_to=".$decode[$i][id]."'><small>rispondi</small></a> - <a href='http://twitter.com/intent/retweet?tweet_id=".$decode[$i][id]."'><small>retweet</small></a> - <a href='http://twitter.com/intent/favorite?tweet_id=".$decode[$i][id]."'><small>preferito</small></a></li>";} echo "
+			</ul>
+		";
+	?>
+
+  <div id='photos-wrap'>
+  </div>
+
+</body>
+</html>
